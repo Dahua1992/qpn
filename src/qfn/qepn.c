@@ -4,14 +4,14 @@
 * @ingroup qep
 * @cond
 ******************************************************************************
-* Last updated for version 6.1.1
-* Last updated on  2018-02-18
+* Last updated for version 6.6.0
+* Last updated on  2019-10-04
 *
-*                    Q u a n t u m     L e a P s
-*                    ---------------------------
-*                    innovating embedded systems
+*                    Q u a n t u m  L e a P s
+*                    ------------------------
+*                    Modern Embedded Software
 *
-* Copyright (C) Quantum Leaps, LLC. All rights reserved.
+* Copyright (C) 2005-2019 Quantum Leaps, LLC. All rights reserved.
 *
 * This program is open source software: you can redistribute it and/or
 * modify it under the terms of the GNU General Public License as published
@@ -29,11 +29,11 @@
 * GNU General Public License for more details.
 *
 * You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
+* along with this program. If not, see <www.gnu.org/licenses>.
 *
 * Contact information:
-* https://www.state-machine.com
-* mailto:info@state-machine.com
+* <www.state-machine.com>
+* <info@state-machine.com>
 ******************************************************************************
 * @endcond
 */
@@ -44,7 +44,7 @@
 Q_DEFINE_THIS_MODULE("qepn")
 
 /****************************************************************************/
-char_t const Q_ROM QP_versionStr[6] = QP_VERSION_STR;
+char_t const Q_ROM QP_versionStr[7] = QP_VERSION_STR;
 
 /****************************************************************************/
 /****************************************************************************/
@@ -81,11 +81,11 @@ static int_fast8_t QHsm_tran_(QHsm * const me,
 * @include qepn_qhsm_ctor.c
 */
 void QHsm_ctor(QHsm * const me, QStateHandler initial) {
-    static QHsmVtbl const vtbl = { /* QHsm virtual table */
+    static QHsmVtable const vtable = { /* QHsm virtual table */
         &QHsm_init_,
         &QHsm_dispatch_
     };
-    me->vptr  = &vtbl;
+    me->vptr  = &vtable;
     me->state = Q_STATE_CAST(&QHsm_top);
     me->temp  = initial;
 }
@@ -108,7 +108,7 @@ void QHsm_init_(QHsm * const me) {
     * transition must be initialized, and the initial transition must not
     * be taken yet.
     */
-    Q_REQUIRE_ID(200, (me->vptr != (QHsmVtbl const *)0)
+    Q_REQUIRE_ID(200, (me->vptr != (QHsmVtable const *)0)
                       && (me->temp != Q_STATE_CAST(0))
                       && (t == Q_STATE_CAST(&QHsm_top)));
 
@@ -467,6 +467,9 @@ QStateHandler QHsm_childState_(QHsm * const me,
 
     /** @post the child must be found */
     Q_ENSURE_ID(810, isFound != false);
+#ifdef Q_NASSERT
+    (void)isFound; /* avoid compiler warning about unused variable */
+#endif
 
     return child; /* return the child */
 }

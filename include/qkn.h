@@ -4,14 +4,14 @@
 * @ingroup qkn
 * @cond
 ******************************************************************************
-* Last updated for version 6.1.1
-* Last updated on  2018-02-18
+* Last updated for version 6.6.0
+* Last updated on  2019-11-20
 *
-*                    Q u a n t u m     L e a P s
-*                    ---------------------------
-*                    innovating embedded systems
+*                    Q u a n t u m  L e a P s
+*                    ------------------------
+*                    Modern Embedded Software
 *
-* Copyright (C) Quantum Leaps, LLC. All rights reserved.
+* Copyright (C) 2005-2019 Quantum Leaps, LLC. All rights reserved.
 *
 * This program is open source software: you can redistribute it and/or
 * modify it under the terms of the GNU General Public License as published
@@ -29,29 +29,25 @@
 * GNU General Public License for more details.
 *
 * You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
+* along with this program. If not, see <www.gnu.org/licenses>.
 *
 * Contact information:
-* https://www.state-machine.com
-* mailto:info@state-machine.com
+* <www.state-machine.com>
+* <info@state-machine.com>
 ******************************************************************************
 * @endcond
 */
-#ifndef qkn_h
-#define qkn_h
+#ifndef QKN_H
+#define QKN_H
 
 /****************************************************************************/
 /*! attributes of the QK kernel */
 typedef struct {
     uint8_t volatile actPrio;     /*!< prio of the active AO */
     uint8_t volatile nextPrio;    /*!< prio of the next AO to execute */
-#ifdef QK_SCHED_LOCK
     uint8_t volatile lockPrio;    /*!< lock prio (0 == no-lock) */
     uint8_t volatile lockHolder;  /*!< prio of the lock holder */
-#endif /* QK_SCHED_LOCK */
-#ifdef QF_ISR_NEST
     uint8_t volatile intNest;     /*!< ISR nesting level */
-#endif /* QF_ISR_NEST */
 } QK_Attr;
 
 /*! global attributes of the QK kernel */
@@ -137,4 +133,4 @@ void QK_onIdle(void);
 
 #endif /* QK_SCHED_LOCK */
 
-#endif /* qkn_h */
+#endif /* QKN_H */

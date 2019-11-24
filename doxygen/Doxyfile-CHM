@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = "QP-nano"
-PROJECT_NUMBER         = "6.3.8"
+PROJECT_NUMBER         = "6.6.0"
 PROJECT_BRIEF          =
 PROJECT_LOGO           = images/header_logo_ql.png
 OUTPUT_DIRECTORY       =
@@ -17,7 +17,7 @@ REPEAT_BRIEF           = YES
 ABBREVIATE_BRIEF       =
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
-FULL_PATH_NAMES        = YES
+FULL_PATH_NAMES        = NO
 STRIP_FROM_PATH        =
 STRIP_FROM_INC_PATH    =
 SHORT_NAMES            = NO
@@ -110,7 +110,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # Configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = \
+INPUT = \
     main.dox \
     gs.dox \
     struct.dox \
@@ -134,6 +134,7 @@ INPUT                  = \
     ../ports/lint \
     ../ports/lint/qkn \
     ../ports/lint/qvn \
+    ../../doxygen/help.dox \
     ../../doxygen/glossary.dox
 
 INPUT_ENCODING         = UTF-8
@@ -165,7 +166,7 @@ EXAMPLE_PATH           = \
 
 EXAMPLE_PATTERNS       = *
 EXAMPLE_RECURSIVE      = NO
-IMAGE_PATH             = images
+IMAGE_PATH             = images ../../doxygen/images
 INPUT_FILTER           =
 FILTER_PATTERNS        =
 FILTER_SOURCE_FILES    = NO
@@ -198,10 +199,10 @@ IGNORE_PREFIX          =
 GENERATE_HTML          = YES
 HTML_OUTPUT            = tmp
 HTML_FILE_EXTENSION    = .html
-HTML_HEADER            = ../../doxygen/header.html
-HTML_FOOTER            = ../../doxygen/footer.html
+HTML_HEADER            = ..\..\doxygen\header.html
+HTML_FOOTER            = ..\..\doxygen\footer.html
 HTML_STYLESHEET        =
-HTML_EXTRA_STYLESHEET  = ../../doxygen/ql.css
+HTML_EXTRA_STYLESHEET  = ..\..\doxygen\ql.css
 HTML_EXTRA_FILES       =
 HTML_COLORSTYLE_HUE    = 220
 HTML_COLORSTYLE_SAT    = 100
@@ -215,7 +216,7 @@ DOCSET_BUNDLE_ID       = com.state-machine.doc
 DOCSET_PUBLISHER_ID    = com.state-machine.doc
 DOCSET_PUBLISHER_NAME  = Quantum Leaps
 GENERATE_HTMLHELP      = YES
-CHM_FILE               = ../../../doxygen/qpn.chm
+CHM_FILE               = C:\qp\uploads\qpn\qpn.chm
 HHC_LOCATION           =
 GENERATE_CHI           = NO
 CHM_INDEX_ENCODING     =
@@ -325,6 +326,7 @@ PREDEFINED             = \
     Q_PARAM_SIZE=2 \
     QF_TIMEEVT_CTR_SIZE=2 \
     QF_TIMEEVT_PERIODIC \
+    QF_TIMEEVT_USAGE \
     QK_SCHED_LOCK \
     QK_ON_CONTEXT_SW
 

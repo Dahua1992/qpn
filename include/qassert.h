@@ -3,14 +3,14 @@
 * @brief Customizable and memory-efficient assertions for embedded systems
 * @cond
 ******************************************************************************
-* Last updated for version 6.3.0
-* Last updated on  2018-05-09
+* Last updated for version 6.6.0
+* Last updated on  2019-10-14
 *
-*                    Q u a n t u m     L e a P s
-*                    ---------------------------
-*                    innovating embedded systems
+*                    Q u a n t u m  L e a P s
+*                    ------------------------
+*                    Modern Embedded Software
 *
-* Copyright (C) 2002-2018 Quantum Leaps, LLC. All rights reserved.
+* Copyright (C) 2005-2019 Quantum Leaps, LLC. All rights reserved.
 *
 * This program is open source software: you can redistribute it and/or
 * modify it under the terms of the GNU General Public License as published
@@ -28,16 +28,16 @@
 * GNU General Public License for more details.
 *
 * You should have received a copy of the GNU General Public License
-* along with this program. If not, see <http://www.gnu.org/licenses/>.
+* along with this program. If not, see <www.gnu.org/licenses>.
 *
 * Contact information:
-* https://www.state-machine.com
-* mailto:info@state-machine.com
+* <www.state-machine.com>
+* <info@state-machine.com>
 ******************************************************************************
 * @endcond
 */
-#ifndef qassert_h
-#define qassert_h
+#ifndef QASSERT_H
+#define QASSERT_H
 
 /**
 * @note
@@ -60,16 +60,10 @@
     #define Q_ALLEGE_ID(id_, test_)     ((void)(test_))
     #define Q_ERROR()                   ((void)0)
     #define Q_ERROR_ID(id_)             ((void)0)
-    #define Q_REQUIRE(test_)            ((void)0)
-    #define Q_REQUIRE_ID(id_, test_)    ((void)0)
-    #define Q_ENSURE(test_)             ((void)0)
-    #define Q_ENSURE_ID(id_, test_)     ((void)0)
-    #define Q_INVARIANT(test_)          ((void)0)
-    #define Q_INVARIANT_ID(id_, test_)  ((void)0)
 
 #else  /* Q_NASSERT not defined--assertion checking enabled */
 
-#ifndef qep_h /* QEP not included (i.e., is quassert.h used outside QP? */
+#ifndef QP_VERSION /* is quassert.h used outside QP? */
 
     /* provide typedefs so that qassert.h could be used "standalone"... */
 
@@ -90,6 +84,11 @@
     * with the MISRA-C 2004 Rules 6.1(req), 6.3(adv).
     */
     typedef int int_t;
+
+    #ifndef Q_ROM /* if NOT defined, provide the default definition */
+         /*! macro for accessing data in ROM */
+         #define Q_ROM
+    #endif
 
 #endif
 
@@ -318,7 +317,7 @@ void Q_onAssert(char_t const Q_ROM * const module, int_t location);
 */
 #define Q_INVARIANT_ID(id_, test_) Q_ASSERT_ID((id_), (test_))
 
-/*! Compile-time assertion. */
+/*! Static (compile-time) assertion. */
 /**
 * @description
 * This type of assertion deliberately causes a compile-time error when
@@ -328,11 +327,13 @@ void Q_onAssert(char_t const Q_ROM * const module, int_t location);
 *
 * @param[in] test_ Compile-time Boolean expression
 */
-#define Q_ASSERT_COMPILE(test_) \
-    extern int_t Q_assert_compile[(test_) ? 1 : -1]
+#define Q_ASSERT_STATIC(test_) \
+    extern int_t Q_assert_static[(test_) ? 1 : -1]
+
+#define Q_ASSERT_COMPILE(test_) Q_ASSERT_STATIC(test_)
 
 /*! Helper macro to calculate static dimension of a 1-dim @p array_ */
 #define Q_DIM(array_) (sizeof(array_) / sizeof((array_)[0]))
 
-#endif /* qassert_h */
+#endif /* QASSERT_H */
 
